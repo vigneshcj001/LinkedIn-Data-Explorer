@@ -34,6 +34,10 @@ def fetch_from_rapidapi(endpoint: str, params: dict):
     except Exception as e:
         return {"success": False, "error": str(e)}
 
+@app.get("/")
+def home():
+    return {"message": "LinkedIn Data Explorer API is running 🚀", 
+            "routes": ["/api/profile", "/api/posts", "/api/comments"]}
 
 @app.get("/api/comments")
 def get_comments(post_url: str, page_number: int = 1, sort_order: str = "Most relevant"):
@@ -87,5 +91,6 @@ def comment_analytics(post_url: str):
 def get_company(identifier: str):
     """Fetch company details by LinkedIn identifier."""
     return fetch_from_rapidapi("companies/detail", {"identifier": identifier})
+
 
 
